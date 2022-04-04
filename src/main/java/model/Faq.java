@@ -12,12 +12,10 @@ public class Faq {
     public static class FaqItem {
         public String title;
         public List<QuestionAndAnswer> questionAnswer;
-
-        public static class QuestionAndAnswer {
-            public String question;
-            public String answer;
-        }
     }
 
-
+    public static class QuestionAndAnswer {
+        public String question;
+        public String answer;
+    }
 }

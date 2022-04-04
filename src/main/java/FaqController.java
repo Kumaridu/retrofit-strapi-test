@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import response.FaqResponse;
+import model.FaqResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -8,22 +8,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class FaqController implements Callback<FaqResponse> {
+public class FaqController implements Callback<FaqResponseBody> {
 
-//    public static String BASE_URL = "http://localhost:1337";
-    public static String BASE_URL = "http://844c-2400-ac40-60b-4e6c-e042-4d4f-c5c-a39b.ngrok.io";
+    public static String BASE_URL = "http://localhost:1337";
 
 
     public void getAllConfiguredFaqs() {
         FaqApi faqApi = getFaqApiClient();
 
-        Call<FaqResponse> call = faqApi.getFaqs();
+        Call<FaqResponseBody> call = faqApi.getFaqs();
         call.enqueue(this);
     }
 
     public void getFaqBySlug() {
         FaqApi faqApi = getFaqApiClient();
-        Call<FaqResponse> call = faqApi.getFaqBySlug("mmbus-frequently-asked-questions");
+        Call<FaqResponseBody> call = faqApi.getFaqBySlug("mmbus-frequently-asked-questions");
         call.enqueue(this);
     }
 
@@ -52,9 +51,9 @@ public class FaqController implements Callback<FaqResponse> {
     }
 
     @Override
-    public void onResponse(Call<FaqResponse> call, Response<FaqResponse> response) {
+    public void onResponse(Call<FaqResponseBody> call, Response<FaqResponseBody> response) {
         if(response.isSuccessful()) {
-            FaqResponse faqs = response.body();
+            FaqResponseBody faqs = response.body();
             faqs.data.stream().forEach(faq -> {
                 System.out.println(faq.attributes.title + " (" + faq.attributes.slug + ") ");
                 System.out.println("-------------------------------------------------------------------------------------------");
@@ -73,7 +72,7 @@ public class FaqController implements Callback<FaqResponse> {
     }
 
     @Override
-    public void onFailure(Call<FaqResponse> call, Throwable throwable) {
+    public void onFailure(Call<FaqResponseBody> call, Throwable throwable) {
         throwable.printStackTrace();
 
     }

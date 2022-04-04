@@ -1,5 +1,4 @@
-import response.FaqResponse;
-import response.GuideLineResponse;
+import model.GuideLineResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -7,5 +6,5 @@ import retrofit2.http.Query;
 public interface GuideLineApi {
 
     @GET("/api/guidelines?populate=*")
-    Call<GuideLineResponse> getFaqBySlug(@Query("filters[slug][$eq]") String slug);
+    Call<GuideLineResponseBody> getFaqBySlug(@Query("filters[slug][$eq]") String slug);
 }

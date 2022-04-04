@@ -1,20 +1,19 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import response.GuideLineResponse;
+import model.GuideLineResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GuideLineController implements Callback<GuideLineResponse> {
+public class GuideLineController implements Callback<GuideLineResponseBody> {
 
-//    public static String BASE_URL = "http://localhost:1337";
-    public static String BASE_URL = "http://844c-2400-ac40-60b-4e6c-e042-4d4f-c5c-a39b.ngrok.io";
+    public static String BASE_URL = "http://localhost:1337";
 
     public void getFaqBySlug() {
         GuideLineApi guideLineApi = getGuideApiClient();
-        Call<GuideLineResponse> call = guideLineApi.getFaqBySlug("mmbus-passenger-guidelines");
+        Call<GuideLineResponseBody> call = guideLineApi.getFaqBySlug("mmbus-passenger-guidelines");
         call.enqueue(this);
     }
 
@@ -41,9 +40,9 @@ public class GuideLineController implements Callback<GuideLineResponse> {
 
 
     @Override
-    public void onResponse(Call<GuideLineResponse> call, Response<GuideLineResponse> response) {
+    public void onResponse(Call<GuideLineResponseBody> call, Response<GuideLineResponseBody> response) {
         if(response.isSuccessful()) {
-            GuideLineResponse guideLines = response.body();
+            GuideLineResponseBody guideLines = response.body();
             guideLines.data.stream().forEach(guideLine -> {
                 System.out.println(guideLine.attributes.title + " (" + guideLine.attributes.slug + ") ");
                 System.out.println("-------------------------------------------------------------------------------------------");
@@ -58,7 +57,7 @@ public class GuideLineController implements Callback<GuideLineResponse> {
     }
 
     @Override
-    public void onFailure(Call<GuideLineResponse> call, Throwable throwable) {
+    public void onFailure(Call<GuideLineResponseBody> call, Throwable throwable) {
 
     }
 }
