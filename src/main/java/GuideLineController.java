@@ -8,7 +8,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GuideLineController implements Callback<GuideLineResponse> {
-    public static String BASE_URL = "http://localhost:1337";
+
+//    public static String BASE_URL = "http://localhost:1337";
+    public static String BASE_URL = "http://844c-2400-ac40-60b-4e6c-e042-4d4f-c5c-a39b.ngrok.io";
 
     public void getFaqBySlug() {
         GuideLineApi guideLineApi = getGuideApiClient();
